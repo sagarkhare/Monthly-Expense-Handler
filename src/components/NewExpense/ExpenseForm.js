@@ -10,6 +10,7 @@ function ExpenseForm(props) {
     amount: "",
     date: "",
   });
+  const [open, setOpen] = useState(false);
 
   const titleChangeHandler = (event) => {
     // setTitle(event.target.value);
@@ -48,15 +49,22 @@ function ExpenseForm(props) {
     event.preventDefault();
     props.onSaveExpenseData(userInput);
     setUserInput({
-        title:"",
-        amount:"",
-        date:"",
+      title: "",
+      amount: "",
+      date: "",
     });
   };
-  
+
+  const cancelHandler = () =>{
+    setOpen(false);
+  };
+  const clickHandler = () =>{
+    setOpen(true);
+  };
+
   return (
     <form onSubmit={submitHandler}>
-      <div className="new-expense__controls">
+      <div className={"new-expense__controls"} style={{display:open?"":"none"}}>
         <div className="new-expense__control">
           <label>Title</label>
           <input
@@ -87,7 +95,11 @@ function ExpenseForm(props) {
           />
         </div>
       </div>
-      <div className="new-expense__actions">
+      <div className="new-expense__click" style={{display:open?"none":"block"}}>
+      <button type="button" onClick={clickHandler}>Add Expense</button>
+      </div>
+      <div className="new-expense__actions" style={{display:open?"block":"none"}}>
+        <button type="button" onClick={cancelHandler}>Cancel</button>
         <button type="submit">Add Expense</button>
       </div>
     </form>

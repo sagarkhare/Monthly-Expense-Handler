@@ -18,4 +18,4 @@ function Chart(props) {
     </div>
   );
 }
-export default Chart;
+export default Chart; 
